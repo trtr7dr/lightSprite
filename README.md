@@ -1,5 +1,7 @@
 # lightSprite
 Простая спрайтовая анимация. Подается список картинок, при скролле они сменяются в выбранном порядке.
+## Официальная страница
+https://gloagent.ru/category/blog/web/lsprite.html
 ## Старт
 ```javascript
 var element = new LightSprite(name, urls, start, duration);
