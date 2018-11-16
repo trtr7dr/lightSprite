@@ -10,9 +10,10 @@ jQuery(function () {
      * @param {number} duration - продолжительность.
      */
 
-    function LightSprite(name, urls, start, duration) { // version 2
+    function LightSprite(name, urls, start, duration) { // version 0.5
 
         if (!jQuery("*").is(jQuery(name))) {
+            console.error('lsprite error: element ' + name + ' not found');
             return false;
         }
 
@@ -27,21 +28,21 @@ jQuery(function () {
         this.fixed = false;
 
         this.x = 0;
-        this.pos = undefined;
-        this.pos_xy = undefined;
+        this.pos = null;
+        this.pos_xy = null;
 
         this.doFix = function () {
             this.fixed = true;
         };
 
         this.startPosition = function () {
-            if (this.pos === undefined) {
+            if (this.pos === null) {
                 this.pos = window.pageYOffset;
             }
         };
 
         this.addXY = function () {
-            if (this.pos_xy === undefined) {
+            if (this.pos_xy === null) {
                 var coord = this.tag.get(0).getBoundingClientRect();
                 this.pos_xy = coord;
             }
@@ -82,10 +83,8 @@ jQuery(function () {
                 if (this.duration > scroll_done && this.start < scroll_done) {
                     num = Math.round((scroll_done - this.start) / this.step).toFixed(0);
                     if (this.tag.attr("src") !== this.urls[num]) {
-                        console.log(this.urls[num]);
                         this.tag.attr('src', this.urls[num]);
                     }
-
                     if (this.fixed) {
                         this.addXY();
                         this.fixedDisposableEffect(num);
